@@ -1,8 +1,5 @@
 import 'package:UIPlayGround/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:stacked/stacked.dart';
-import '../views/home_view.dart';
 import 'package:UIPlayGround/services/database_service.dart';
 import 'package:UIPlayGround/locator.dart';
 import 'package:UIPlayGround/services/navigation_service.dart';

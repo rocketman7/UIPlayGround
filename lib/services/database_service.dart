@@ -17,7 +17,7 @@ class DatabaseService {
   //   @required String collection,
   //   @required String document,
   // }) async {
-  //   _db.collection(collection).add({
+  //   _db.collection(collection)({
 
   //   })
   // }

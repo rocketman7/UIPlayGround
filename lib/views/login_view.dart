@@ -1,11 +1,9 @@
 import 'dart:math';
 
 import 'package:UIPlayGround/services/navigation_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:UIPlayGround/view_models/login_view_model.dart';
 import 'package:UIPlayGround/locator.dart';
-import 'package:UIPlayGround/services/navigation_service.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -14,34 +12,38 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  // 애니메이션 컨트롤러, 애니메이션 선언
+  AnimationController _aniController;
   Animation _animation;
 
-  final LoginViewModel _auth = LoginViewModel();
+  // 뷰 모델과 service 선언
+  final LoginViewModel _loginModel = LoginViewModel();
+  final NavigationService _naviService = locator<NavigationService>();
 
+  // input과 관련된 컨트롤러 선언
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    _aniController = AnimationController(
       duration: const Duration(seconds: 7),
       vsync: this,
     );
-    // Tween은 _controller의 두 사이 값을 지정
+    // Tween은 _animation의 두 사이 값을 지정
     _animation = Tween<double>(begin: -1.0, end: 1.0).animate(
       CurvedAnimation(
         curve: Curves.easeIn,
-        parent: _controller,
+        parent: _aniController,
       ),
     );
-    _controller.repeat();
+    _aniController.repeat();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _aniController.dispose();
     super.dispose();
   }
 
@@ -84,7 +86,7 @@ class _LoginViewState extends State<LoginView>
                 padding: const EdgeInsets.only(
                     top: 130, right: 20), //이미지가 쏠려서 패딩으로 위치 약간 수정
                 child: AnimatedBuilder(
-                    animation: _controller.view,
+                    animation: _aniController.view,
                     child: Image(
                       image: AssetImage('assets/images/sailingYacht.png'),
                       height: 130,
@@ -136,13 +138,14 @@ class _LoginViewState extends State<LoginView>
               SizedBox(
                 height: 20,
               ),
+              // 아래 따로 위젯으로 만듬
               _inputForm(),
               SizedBox(
                 height: 11,
               ),
               FlatButton(
                 onPressed: () {
-                  locator<NavigationService>().navigateTo('register');
+                  _naviService.navigateTo('register');
                 },
                 child: Text(
                   "계정이 없으신가요? 지금 가입하세요!",
@@ -159,6 +162,7 @@ class _LoginViewState extends State<LoginView>
     ));
   }
 
+  // 로그인 관련한 inputForm 위젯
   Widget _inputForm() {
     return Column(children: <Widget>[
       // TextFormField 크기 제한
@@ -206,7 +210,7 @@ class _LoginViewState extends State<LoginView>
       SizedBox(height: 4),
       // Card는 child의 크기를 이어 받는다 -> ConstrainedBox로 제한
       FlatButton(
-        onPressed: () => _auth.login(
+        onPressed: () => _loginModel.login(
             email: _emailController.text, password: _passwordController.text),
         child: Card(
           color: Color(0xFF09C3CF).withOpacity(.56),

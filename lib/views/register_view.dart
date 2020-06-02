@@ -1,13 +1,8 @@
-import 'dart:math';
-
-import 'package:UIPlayGround/locator.dart';
-import 'package:UIPlayGround/services/navigation_service.dart';
 import 'package:UIPlayGround/view_models/register_view_model.dart';
-
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatelessWidget {
-  final RegisterViewModel _registerViewModel = RegisterViewModel();
+  final RegisterViewModel _registerModel = RegisterViewModel();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nickNameController = TextEditingController();
@@ -140,7 +135,7 @@ class RegisterView extends StatelessWidget {
             onPressed: () {
               //웨에 설정한 validation 들이 모두 true이면 아래 함수 실행
               if (_formKey.currentState.validate()) {
-                _registerViewModel.register(
+                _registerModel.register(
                   nickName: _nickNameController.text,
                   email: _emailController.text,
                   password: _passwordController.text,

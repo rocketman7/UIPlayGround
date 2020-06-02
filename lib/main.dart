@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: locator<NavigationService>().navigatorKey,
       onGenerateRoute: (routeSettings) {
         switch (routeSettings.name) {
+          // navigation service에서 접근할 route이름들 view설정
           case 'loggedIn':
             return MaterialPageRoute(builder: (context) => HomeView());
           case 'register':
