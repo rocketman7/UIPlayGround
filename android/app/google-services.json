@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "828814498477",
+    "firebase_url": "https://authdbtest-9aa0e.firebaseio.com",
+    "project_id": "authdbtest-9aa0e",
+    "storage_bucket": "authdbtest-9aa0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828814498477:android:bc2a8d9bc0f72dacf18424",
+        "android_client_info": {
+          "package_name": "com.example.UIPlayGround"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828814498477-0gtrmgo9e719mq9ha8r8pgk4sboot496.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdc6CiHYvamXNcgweSsBMoqCJX1dc7Wrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828814498477-0gtrmgo9e719mq9ha8r8pgk4sboot496.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
