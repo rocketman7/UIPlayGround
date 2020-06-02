@@ -25,6 +25,7 @@ class RegisterViewModel extends BaseModel {
     var user = await auth.currentUser();
     userData = {'userName': nickName, 'email': email};
     print(userData);
+    // setDataMap에 넣고자하는 userData를 Map 타입으로 받아서 바로 넣기 -> userModel 필요할듯
     await _db.createAtDB(
         collection: 'users', document: user.uid, setDataMap: userData);
 

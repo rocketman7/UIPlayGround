@@ -116,6 +116,7 @@ class RegisterView extends StatelessWidget {
             child: TextFormField(
               controller: _confirmPasswordController,
               obscureText: true,
+              // 위에서 입력한 passwordController와 현재 컨트롤러 밸류를 비교해서 동일한지 체크
               validator: (value) {
                 if (value != _passwordController.text) {
                   return "비밀번호가 다릅니다.";
@@ -137,6 +138,7 @@ class RegisterView extends StatelessWidget {
           // Card는 child의 크기를 이어 받는다 -> ConstrainedBox로 제한
           FlatButton(
             onPressed: () {
+              //웨에 설정한 validation 들이 모두 true이면 아래 함수 실행
               if (_formKey.currentState.validate()) {
                 _registerViewModel.register(
                   nickName: _nickNameController.text,
