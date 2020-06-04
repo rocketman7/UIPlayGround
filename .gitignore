@@ -41,3 +41,9 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# Widget Test
+/lib/views/widget_test_1.dart
+/lib/views/widget_test_2.dart
+/lib/views/widget_test_3.dart
+/lib/views/widget_test_4.dart

@@ -1,6 +1,12 @@
+import 'package:UIPlayGround/models/user_model.dart';
+import 'package:UIPlayGround/services/auth_service.dart';
 import 'package:flutter/widgets.dart';
 
 class BaseModel extends ChangeNotifier {
+  final AuthService _authenticationService = AuthService();
+
+  User get currentUser => _authenticationService.currentUser;
+
   bool _busy = false;
   bool get busy => _busy;
 

@@ -5,7 +5,7 @@ class RegisterView extends StatelessWidget {
   final RegisterViewModel _registerModel = RegisterViewModel();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nickNameController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -36,7 +36,7 @@ class RegisterView extends StatelessWidget {
               Size(250, 50),
             ),
             child: TextFormField(
-              controller: _nickNameController,
+              controller: _userNameController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 filled: true,
@@ -136,7 +136,7 @@ class RegisterView extends StatelessWidget {
               //웨에 설정한 validation 들이 모두 true이면 아래 함수 실행
               if (_formKey.currentState.validate()) {
                 _registerModel.register(
-                  nickName: _nickNameController.text,
+                  userName: _userNameController.text,
                   email: _emailController.text,
                   password: _passwordController.text,
                 );
