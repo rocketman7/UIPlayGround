@@ -10,10 +10,16 @@ import 'base_model.dart';
 class HomeViewModel {
   final AuthService _authService = AuthService();
   final DatabaseService _databaseService = DatabaseService();
-  final NavigationService _naviService = locator<NavigationService>();
+  final NavigationService _navigationService = locator<NavigationService>();
 
   Future signOut() async {
     await _authService.signOut();
+    var hasUserLoggedIn = await _authService.isUserLoggedIn();
+    if (hasUserLoggedIn) {
+      _navigationService.navigateTo('loggedIn');
+    } else {
+      _navigationService.navigateTo('login');
+    }
   }
   // Future getUserUid() async {
   //   // final FirebaseUser user = await _authService.currentUser();

@@ -13,32 +13,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final _auth = AuthService().auth;
-  final _db = DatabaseService().db;
+  // final _auth = AuthService().auth;
+  // final _db = DatabaseService().db;
 
   String userEmail = "a";
   String userUid;
   String userNickName = "b";
-
-  // Future getUser() async {
-  //   final FirebaseUser user = await _auth.currentUser();
-  //   final uid = user.uid;
-  //   final email = user.email;
-  //   setState(() {
-  //     userEmail = email;
-  //     userUid = uid;
-  //   });
-  //   print(email);
-  // }
-
-  // Future getNickName() async {
-  //   final nickName = await _db.collection('users').document(userUid).get();
-  //   String userName = nickName.data['userName'].toString();
-  //   setState(() {
-  //     userNickName = userName;
-  //   });
-  //   print(userNickName);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: FlatButton(
                 onPressed: () {
-                  _auth.signOut();
+                  _homeModel.signOut();
                 },
                 child: Text(
                   "Sign Out",
