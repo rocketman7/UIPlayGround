@@ -15,7 +15,7 @@ class AuthService {
 // isUserLoggedIn??
   Future<bool> isUserLoggedIn() async {
     var user = await _auth.currentUser();
-    await _populateCurrentUser(user);
+    await populateCurrentUser(user);
     // 로그인 되었다면 return true, 로그인 안 된 상태면 false
     return user != null;
   }
@@ -67,7 +67,7 @@ class AuthService {
   }
 
   // 유저 정보 multiple places에 뿌리기
-  Future _populateCurrentUser(FirebaseUser user) async {
+  Future populateCurrentUser(FirebaseUser user) async {
     if (user != null) {
       _currentUser = await _db.getUser(user.uid);
     }

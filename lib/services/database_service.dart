@@ -22,7 +22,9 @@ class DatabaseService {
   // 유저 정보 가져오기
   Future getUser(String uid) async {
     try {
+      print(uid);
       var userData = await _usersCollectionReferece.document(uid).get();
+      print(User.fromData(userData.data).email);
       return User.fromData(userData.data);
     } catch (e) {
       return e.message;

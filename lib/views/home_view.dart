@@ -1,10 +1,4 @@
-import 'dart:math';
-
-import 'package:UIPlayGround/services/auth_service.dart';
-
-import 'package:UIPlayGround/services/database_service.dart';
 import 'package:UIPlayGround/view_models/home_view_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -16,23 +10,45 @@ class _HomeViewState extends State<HomeView> {
   // final _auth = AuthService().auth;
   // final _db = DatabaseService().db;
 
-  String userEmail = "a";
-  String userUid;
-  String userNickName = "b";
+  // String userEmail = "a";
+  // String userUid;
+  // String userName = "b";
+  // dynamic user;
+  // User userMap;
 
   @override
   Widget build(BuildContext context) {
     final HomeViewModel _homeModel = HomeViewModel();
-    // _homeModel.getUserUid();
-    // getUser();
-    // getNickName();
+
+    // Future<User> getUser() async {
+    //   User userMap = await _homeModel.getUser();
+    //   print(userMap.email);
+    //   return userMap;
+    // }
+
+    // getUser().then((value) => userName = (value.email.toString()));
+
+    // Future.delayed(Duration(seconds: 5), () {
+    //   setState(() {});
+    // });
+    // // getNickName();
+
     return Scaffold(
       backgroundColor: Colors.red,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text(userNickName),
+          FutureBuilder(
+            future: _homeModel.getUser(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data.email);
+              } else {
+                return Container(child: CircularProgressIndicator());
+              }
+            },
+          ),
           Center(
             child: Container(
               // color: Colors.white,
@@ -78,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           SizedBox(height: 50),
-          Text(userEmail),
+          // Text(userEmail),
         ],
       ),
     );

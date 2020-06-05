@@ -1,3 +1,4 @@
+import 'package:UIPlayGround/models/user_model.dart';
 import 'package:UIPlayGround/services/auth_service.dart';
 import 'package:UIPlayGround/services/database_service.dart';
 import 'package:UIPlayGround/services/navigation_service.dart';
@@ -12,6 +13,8 @@ class HomeViewModel {
   final DatabaseService _databaseService = DatabaseService();
   final NavigationService _navigationService = locator<NavigationService>();
 
+  User _currentUser;
+
   Future signOut() async {
     await _authService.signOut();
     var hasUserLoggedIn = await _authService.isUserLoggedIn();
@@ -20,6 +23,13 @@ class HomeViewModel {
     } else {
       _navigationService.navigateTo('login');
     }
+  }
+
+  Future getUser() async {
+    var userResult = await FirebaseAuth.instance.currentUser();
+    String _currentUid = userResult.uid;
+    _currentUser = await _databaseService.getUser(_currentUid);
+    return _currentUser;
   }
   // Future getUserUid() async {
   //   // final FirebaseUser user = await _authService.currentUser();
