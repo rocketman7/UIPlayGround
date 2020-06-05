@@ -33,70 +33,88 @@ class _HomeViewState extends State<HomeView> {
     // });
     // // getNickName();
 
-    return Scaffold(
-      backgroundColor: Colors.red,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          FutureBuilder(
-            future: _homeModel.getUser(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data.email);
-              } else {
-                return Container(child: CircularProgressIndicator());
-              }
-            },
-          ),
-          Center(
-            child: Container(
-              // color: Colors.white,
-              padding: EdgeInsets.all(8),
-              // constraints: BoxConstraints.expand(),
-              alignment: Alignment.center,
-              width: 200,
-              height: 200,
-              // transform: Matrix4.rotationZ(.5),
-              decoration: BoxDecoration(
-                // color: Colors.blueGrey,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 0.5,
-                  style: BorderStyle.none,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(40)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black,
-                    blurRadius: 4.0,
-                    spreadRadius: 2.0,
-                    offset: Offset(4, 4),
-                  )
+    return FutureBuilder(
+        future: _homeModel.getUser(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+              backgroundColor: Colors.red,
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(snapshot.data.email),
+                  // FutureBuilder(
+                  //   future: _homeModel.getUser(),
+                  //   builder: (context, snapshot) {
+                  //     print("fetching");
+                  //     if (snapshot.hasData) {
+                  //       return Text(snapshot.data.email);
+                  //     } else {
+                  //       return Container(child: CircularProgressIndicator());
+                  //     }
+                  //   },
+                  // ),
+                  Center(
+                    child: Container(
+                      // color: Colors.white,
+                      padding: EdgeInsets.all(8),
+                      // constraints: BoxConstraints.expand(),
+                      alignment: Alignment.center,
+                      width: 200,
+                      height: 200,
+                      // transform: Matrix4.rotationZ(.5),
+                      decoration: BoxDecoration(
+                        // color: Colors.blueGrey,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 0.5,
+                          style: BorderStyle.none,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 4.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(4, 4),
+                          )
+                        ],
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.blue,
+                            Colors.blueGrey,
+                          ],
+                        ),
+                        // shape: BoxShape.circle,
+                      ),
+                      child: FlatButton(
+                        onPressed: () {
+                          _homeModel.signOut();
+                        },
+                        child: Text(
+                          "Sign Out",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  Text(snapshot.data.userName),
                 ],
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.blue,
-                    Colors.blueGrey,
-                  ],
-                ),
-                // shape: BoxShape.circle,
               ),
-              child: FlatButton(
-                onPressed: () {
-                  _homeModel.signOut();
-                },
-                child: Text(
-                  "Sign Out",
-                  style: TextStyle(fontSize: 20),
+            );
+          } else {
+            return Scaffold(
+              body: Center(
+                child: Container(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.blueAccent,
+                  ),
                 ),
               ),
-            ),
-          ),
-          SizedBox(height: 50),
-          // Text(userEmail),
-        ],
-      ),
-    );
+            );
+          }
+        });
   }
 }
