@@ -3,7 +3,7 @@ import 'package:UIPlayGround/services/auth_service.dart';
 import 'package:UIPlayGround/services/database_service.dart';
 import 'package:UIPlayGround/services/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+
 import 'package:UIPlayGround/locator.dart';
 
 import 'base_model.dart';
@@ -25,10 +25,12 @@ class HomeViewModel {
     }
   }
 
+  // HomeView에서 Futurebuilder의 future 함수로 아래를 호출할 것
+  // 함수가 호출되면, 1. Auth의 currentUser에서 uid를 가져오고, 2. 그 uid를 이용하여 dbService의 getUser함수를 불러
+  // User class의 _currentUser를 할당한다
   Future getUser() async {
     var userResult = await FirebaseAuth.instance.currentUser();
-    String _currentUid = userResult.uid;
-    _currentUser = await _databaseService.getUser(_currentUid);
+    _currentUser = await _databaseService.getUser(userResult.uid);
     return _currentUser;
   }
   // Future getUserUid() async {

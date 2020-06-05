@@ -19,7 +19,7 @@ class DatabaseService {
     }
   }
 
-  // 유저 정보 가져오기
+  // 유저 정보 가져오기. 가져와서 data를 User class로 return 한다.
   Future getUser(String uid) async {
     try {
       print(uid);

@@ -1,9 +1,12 @@
 import 'package:UIPlayGround/view_models/register_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:UIPlayGround/locator.dart';
+import 'package:UIPlayGround/services/navigation_service.dart';
 
 class RegisterView extends StatelessWidget {
   final RegisterViewModel _registerModel = RegisterViewModel();
 
+  final NavigationService _naviService = locator<NavigationService>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -134,6 +137,7 @@ class RegisterView extends StatelessWidget {
           FlatButton(
             onPressed: () {
               //웨에 설정한 validation 들이 모두 true이면 아래 함수 실행
+              // !! userName DB와 비교하여 중복 안 되게 해야 함!! //
               if (_formKey.currentState.validate()) {
                 _registerModel.register(
                   userName: _userNameController.text,
@@ -161,6 +165,18 @@ class RegisterView extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+          ),
+          SizedBox(
+            height: 11,
+          ),
+          FlatButton(
+            onPressed: () {
+              _naviService.navigateTo('login');
+            },
+            child: Text(
+              "계정이 이미 있으면 로그인하세요!",
+              style: TextStyle(fontSize: 14),
             ),
           ),
         ],

@@ -210,6 +210,7 @@ class _LoginViewState extends State<LoginView>
       SizedBox(height: 4),
       // Card는 child의 크기를 이어 받는다 -> ConstrainedBox로 제한
       FlatButton(
+        //VIewModel의 login함수로 계정 정보를 넘긴다.
         onPressed: () => _loginModel.login(
             email: _emailController.text, password: _passwordController.text),
         child: Card(

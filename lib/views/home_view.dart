@@ -28,11 +28,8 @@ class _HomeViewState extends State<HomeView> {
 
     // getUser().then((value) => userName = (value.email.toString()));
 
-    // Future.delayed(Duration(seconds: 5), () {
-    //   setState(() {});
-    // });
-    // // getNickName();
-
+    // FutureBuilder의 future: 를 불러온다. builder는 context와 future에서 부른 sanpshot을 input으로.
+    // snapshot의 Data가 들어오면 Scaffold 이하 위젯 트리를 빌드한다.
     return FutureBuilder(
         future: _homeModel.getUser(),
         builder: (context, snapshot) {
@@ -43,18 +40,8 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  //이미 snapshot에 data가 있는 상태이기 때문에 아래와 같이 입력하면 Text null에러가 나지 않는다.
                   Text(snapshot.data.email),
-                  // FutureBuilder(
-                  //   future: _homeModel.getUser(),
-                  //   builder: (context, snapshot) {
-                  //     print("fetching");
-                  //     if (snapshot.hasData) {
-                  //       return Text(snapshot.data.email);
-                  //     } else {
-                  //       return Container(child: CircularProgressIndicator());
-                  //     }
-                  //   },
-                  // ),
                   Center(
                     child: Container(
                       // color: Colors.white,
@@ -104,6 +91,7 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             );
+            // snapshot의 데이터가 fetch될 동안 아래 화면 보여준다.
           } else {
             return Scaffold(
               body: Center(

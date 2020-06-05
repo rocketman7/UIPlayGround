@@ -12,9 +12,11 @@ class AuthService {
   User _currentUser;
   User get currentUser => _currentUser;
 
-// isUserLoggedIn??
+// 유저 로그인여부 확인.
   Future<bool> isUserLoggedIn() async {
     var user = await _auth.currentUser();
+    // 로그인 여부 확인할 때(즉 처음 어플이 빌드될 때) 아래 함수를 불러서 유저 정보를 넣는다.
+    //(아마 AuthService().currentUser를 다른 곳에서 계속 사용하면 될 듯(적용필요))
     await populateCurrentUser(user);
     // 로그인 되었다면 return true, 로그인 안 된 상태면 false
     return user != null;

@@ -9,7 +9,7 @@ class LoginViewModel extends BaseModel {
 // service 단에 있는 AuthService 클래스를 불러와서
   final AuthService _authService = AuthService();
   final NavigationService _naviService = locator<NavigationService>();
-  // 로그인 function을 만든다.
+  // 로그인 function. View로부터 전달받은 계정정보를 input으로 authService의 로그인 함수를 호출.
   Future login({@required String email, @required String password}) async {
     var result =
         await _authService.loginWithEmail(email: email, password: password);
@@ -17,7 +17,8 @@ class LoginViewModel extends BaseModel {
     if (result is bool) {
       if (result) {
         print('Login Success');
-        _naviService.navigateTo('loggedIn'); // HomeView로 가는 것만 해결하면 됨
+        // loggedIn 화면으로 route (HomeView)
+        _naviService.navigateTo('loggedIn');
       } else {
         print('Login Failure');
       }
